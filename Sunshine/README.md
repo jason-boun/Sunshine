@@ -11,7 +11,6 @@ sunshine
 一、ContentProvider + SQLite + LoaderManager 加载数据
 	1、加载器LoaderManager
 		(1)、实现LoadCallback()		重写下面方法
-
 				onCreateLoader()
 					实例化并返回一个新创建给指定ID的Loader对象；第一启动时调用
 					{

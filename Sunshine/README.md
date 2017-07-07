@@ -11,16 +11,19 @@ sunshine
 一、ContentProvider + SQLite + LoaderManager 加载数据
 	1、加载器LoaderManager
 		(1)、实现LoadCallback()		重写下面方法
-				onCreateLoader()
-					实例化并返回一个新创建给指定ID的Loader对象；第一启动时调用
+			onCreateLoader()
+				实例化并返回一个新创建给指定ID的Loader对象；第一启动时调用
+				{
+					 AsyncTaskLoader 类似AsyncTask
+					CursorLoader 是AsyncTaskLoader的子类，
+					内部持有ForceLoadContentObserver变量，观察者来实现对数据源的数据更新(自动更新数据)
 					{
-						 AsyncTaskLoader 类似AsyncTask
-
-						CursorLoader 是AsyncTaskLoader的子类，内部持有ForceLoadContentObserver变量，观察者来实现对数据源的数据更新(自动更新数据)
-						{
-								在我们使用CurSorLoader时大家都会考虑一种情况的处理—–当数据库发生变化时如何自动刷新当前UI，数据库在数据改变时通过ContentPorvider和ContentResolver发出通知，接着ContentProvider通知Cursor的观察者数据发生了变化，然后Cursor通知CursorLoader的观察者数据发生了变化，CursorLoader又通过ContentProvider加载新数据，完成后调用CursorAdapter的changeCursor()用新数据替换旧数据显示。
-								自动更新实现步骤
-									对获取的Cursor数据设置需要监听的URI（即，在ContentProvider的query()方法或者Loader的loadingBackground()方法中调用Cursor的setNotificationUri()方法）；
+						在我们使用CurSorLoader时大家都会考虑一种情况的处理—–当数据库发生变化时如何自动刷新当前UI，数据库在数据改
+						变时通过ContentPorvider和ContentResolver发出通知，接着ContentProvider通知Cursor的观察者数据发生了变
+						化，然后Cursor通知CursorLoader的观察者数据发生了变化，CursorLoader又通过ContentProvider加载新数据，完
+						成后调用CursorAdapter的changeCursor()用新数据替换旧数据显示。
+					自动更新实现步骤
+					对获取的Cursor数据设置需要监听的URI（即，在ContentProvider的query()方法或者Loader的loadingBackground()方法中调用Cursor的setNotificationUri()方法）；
 									在ContentProvider的insert()、update()、delete()等方法中调用ContentResolver的notifyChange()方法;
 						}
 					}

@@ -72,14 +72,12 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         switch (viewType) {
 //          COMPLETED (15) If the view type of the layout is today, display a large icon
             case VIEW_TYPE_TODAY:
-                weatherImageId = WeatherUtils
-                        .getLargeArtResourceIdForWeatherCondition(weatherId);
+                weatherImageId = WeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
                 break;
 
 //          COMPLETED (16) If the view type of the layout is today, display a small icon
             case VIEW_TYPE_FUTURE_DAY:
-                weatherImageId = WeatherUtils
-                        .getSmallArtResourceIdForWeatherCondition(weatherId);
+                weatherImageId = WeatherUtils.getSmallArtResourceIdForWeatherCondition(weatherId);
                 break;
 
 //          COMPLETED (17) Otherwise, throw an IllegalArgumentException
